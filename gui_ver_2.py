@@ -94,7 +94,7 @@ class HebrewSignLanguageApp:
         """
         # --- Main Window Setup ---
         self.root = root_window
-        self.root.title("זיהוי שפת הסימנים הישראלית") # "Israeli Sign Language Recognition"
+        self.root.title("Israeli Sign Language Recognition")
         self.root.geometry("1200x850")
         self.root.configure(bg='#f0f0f0')
 
@@ -186,7 +186,7 @@ class HebrewSignLanguageApp:
         title_frame = tk.Frame(self.root, bg='#2c3e50', height=60)
         title_frame.pack(fill='x', padx=10, pady=(10, 5))
         title_frame.pack_propagate(False) # Prevent the frame from shrinking to fit its content.
-        title_label = tk.Label(title_frame, text="🤟 זיהוי שפת הסימנים הישראלית 🤟",
+        title_label = tk.Label(title_frame, text="🤟 Israeli Sign Language Recognition 🤟",
                                font=('Arial', 22, 'bold'), fg='white', bg='#2c3e50')
         title_label.pack(expand=True)
 
@@ -206,7 +206,7 @@ class HebrewSignLanguageApp:
         left_panel.grid_columnconfigure(0, weight=1)
 
         # A labeled frame to contain the camera feed.
-        camera_frame = tk.LabelFrame(left_panel, text="📷 מצלמה", # "Camera"
+        camera_frame = tk.LabelFrame(left_panel, text="📷 Camera",
                                      font=('Arial', 14, 'bold'), bg='white', fg='#2c3e50',
                                      relief='raised', bd=2)
         camera_frame.grid(row=0, column=0, pady=(0, 5), sticky="nsew")
@@ -228,7 +228,7 @@ class HebrewSignLanguageApp:
         status_pred_frame.grid_columnconfigure(0, weight=1)
 
         # Label to show the application's current status (e.g., loading model, camera on).
-        self.status_label = tk.Label(status_pred_frame, text="סטטוס: טוען...", # "Status: Loading..."
+        self.status_label = tk.Label(status_pred_frame, text="Status: Loading...",
                                      font=('Arial', 12), bg='#ecf0f1', fg='#2c3e50', relief='sunken', bd=1)
         self.status_label.grid(row=0, column=0, columnspan=2, pady=5, padx=5, sticky="ew")
 
@@ -239,12 +239,12 @@ class HebrewSignLanguageApp:
         pred_label_frame.grid_columnconfigure(1, weight=1)
 
         # Label for the predicted letter.
-        self.prediction_label = tk.Label(pred_label_frame, text="אות: -", # "Letter: -"
+        self.prediction_label = tk.Label(pred_label_frame, text="Letter: -",
                                          font=('Arial', 16, 'bold'), bg='white', fg='#27ae60')
         self.prediction_label.grid(row=0, column=0, sticky="w", padx=5)
 
         # Label for the prediction confidence.
-        self.confidence_label = tk.Label(pred_label_frame, text="אמינות: 0%", # "Confidence: 0%"
+        self.confidence_label = tk.Label(pred_label_frame, text="Confidence: 0%",
                                          font=('Arial', 12), bg='white', fg='#7f8c8d')
         self.confidence_label.grid(row=0, column=1, sticky="e", padx=5)
 
@@ -253,7 +253,7 @@ class HebrewSignLanguageApp:
         self.fps_label.grid(row=3, column=0, sticky="w", padx=10, pady=(5, 0))
 
         # --- Right Panel: Text Display (No buttons) ---
-        text_panel_frame = tk.LabelFrame(main_frame, text="📝 הטקסט שלך", # "Your Text"
+        text_panel_frame = tk.LabelFrame(main_frame, text="📝 Your Text",
                                          font=('Arial', 14, 'bold'), bg='white', fg='#2c3e50',
                                          relief='raised', bd=2)
         text_panel_frame.grid(row=0, column=1, padx=(5, 0), sticky="nsew")
@@ -271,8 +271,7 @@ class HebrewSignLanguageApp:
         info_bar_frame = tk.Frame(self.root, bg='#34495e', height=50)
         info_bar_frame.pack(fill='x', padx=10, pady=(5, 10))
         info_bar_frame.pack_propagate(False)
-        info_text = "הוספת אות: הכנס יד שנייה לפריים  |  רווח: הנהון ראש  |  מחיקה: נענוע ראש  |  ניקוי הכל: קרב יד למצלמה"
-        # "Add Letter: Bring second hand to frame | Space: Nod head | Delete: Shake head | Clear All: Bring hand close to camera"
+        info_text = "Add Letter: Bring second hand to frame  |  Space: Nod head  |  Delete: Shake head  |  Clear All: Bring hand close to camera"
         info_bar_label = tk.Label(info_bar_frame, text=info_text,
                                   font=('Arial', 16, 'bold'), fg='white', bg='#34495e')
         info_bar_label.pack(expand=True)
@@ -296,11 +295,11 @@ class HebrewSignLanguageApp:
                 self.app_img_size = self.metadata['img_size']
 
             # Update status label to show success.
-            self.status_label.config(text="סטטוס: המודל נטען בהצלחה 👍", bg='#d4edda', fg='#155724') # "Status: Model loaded successfully"
+            self.status_label.config(text="Status: Model loaded successfully 👍", bg='#d4edda', fg='#155724')
             print("✅ Model and metadata loaded successfully!")
         except Exception as e:
             # If loading fails, show a critical error and terminate the application.
-            messagebox.showerror("שגיאה קריטית", f"שגיאה קריטית בטעינת המודל: {e}\n\nהאפליקציה תיסגר.") # "Critical Error"
+            messagebox.showerror("Critical Error", f"Critical error loading model: {e}\n\nApplication will close.")
             self.root.destroy()
 
     def start_camera(self) -> None:
@@ -327,7 +326,7 @@ class HebrewSignLanguageApp:
 
             self.is_camera_on = True
             # Update status label.
-            self.status_label.config(text="סטטוס: המצלמה פועלת 🟢", bg='#d4edda', fg='#155724') # "Status: Camera is active"
+            self.status_label.config(text="Status: Camera is active 🟢", bg='#d4edda', fg='#155724')
 
             # Run the camera loop in a separate thread to prevent the GUI from freezing.
             self.camera_thread = threading.Thread(target=self.camera_loop, daemon=True)
@@ -335,7 +334,7 @@ class HebrewSignLanguageApp:
         except Exception as e:
             # Show an error message if the camera cannot be started.
             messagebox.showerror("Camera Start Error", f"Could not start camera:\n{str(e)}")
-            self.status_label.config(text="סטטוס: שגיאה בהפעלת המצלמה ❌", bg='#f8d7da', fg='#721c24') # "Status: Error starting camera"
+            self.status_label.config(text="Status: Error starting camera ❌", bg='#f8d7da', fg='#721c24')
 
     def camera_loop(self) -> None:
         """Main loop for camera, gesture detection, and prediction."""
@@ -672,7 +671,7 @@ class HebrewSignLanguageApp:
         # Only add a valid, recognized letter.
         if letter_to_add and letter_to_add != "?":
             # If the display has the placeholder text, clear it first.
-            if self.text_display.get("1.0", tk.END).strip() == "הטקסט שלך יופיע כאן...":
+            if self.text_display.get("1.0", tk.END).strip() == "Your text will appear here...":
                 self.current_text = ""
             self.current_text += letter_to_add
             self.update_text_display()
@@ -684,7 +683,7 @@ class HebrewSignLanguageApp:
         """Adds a space or converts the last letter to its final form."""
         print("ACTION: Head Nod -> Add space")
         # Ignore if text area is empty or has placeholder.
-        if not self.current_text or self.text_display.get("1.0", tk.END).strip() == "הטקסט שלך יופיע כאן...":
+        if not self.current_text or self.text_display.get("1.0", tk.END).strip() == "Your text will appear here...":
             return
         # Check if the last character has a final form (sofit).
         if self.current_text and self.current_text[-1] in FINAL_LETTERS_MAP:
@@ -697,7 +696,7 @@ class HebrewSignLanguageApp:
     def trigger_backspace_action(self):
         """Deletes the last character from the text display."""
         print("ACTION: Head Shake -> Backspace")
-        if self.current_text and self.text_display.get("1.0", tk.END).strip() != "הטקסט שלך יופיע כאן...":
+        if self.current_text and self.text_display.get("1.0", tk.END).strip() != "Your text will appear here...":
             # Simple string slicing to remove the last character.
             self.current_text = self.current_text[:-1]
             self.update_text_display()
@@ -752,7 +751,7 @@ class HebrewSignLanguageApp:
         self.text_display.config(state='normal') # Enable editing.
         self.text_display.delete('1.0', tk.END) # Clear existing content.
         # Insert the current text, or the placeholder if the text is empty.
-        self.text_display.insert('1.0', self.current_text if self.current_text.strip() else "הטקסט שלך יופיע כאן...") # "Your text will appear here..."
+        self.text_display.insert('1.0', self.current_text if self.current_text.strip() else "Your text will appear here...")
         self.text_display.config(state='disabled') # Disable editing to make it read-only for the user.
 
     def update_prediction_display(self, letter: str, confidence: float) -> None:
@@ -760,14 +759,14 @@ class HebrewSignLanguageApp:
         self.last_predicted_letter = letter
 
         # Change color and text based on confidence level for better user feedback.
-        if confidence >= 0.8: c, t = '#27ae60', "גבוהה מאוד" # Very High
-        elif confidence >= 0.65: c, t = '#2980b9', "טובה" # Good
-        elif confidence >= 0.45: c, t = '#f39c12', "בינונית" # Medium
-        else: c, t = '#e74c3c', "נמוכה" # Low
+        if confidence >= 0.8: c, t = '#27ae60', "Very High"
+        elif confidence >= 0.65: c, t = '#2980b9', "Good"
+        elif confidence >= 0.45: c, t = '#f39c12', "Medium"
+        else: c, t = '#e74c3c', "Low"
 
         # Update the labels with the new information.
-        self.prediction_label.config(text=f"אות: {letter}", fg=c) # "Letter:"
-        self.confidence_label.config(text=f"אמינות: {confidence:.1%} ({t})") # "Confidence:"
+        self.prediction_label.config(text=f"Letter: {letter}", fg=c)
+        self.confidence_label.config(text=f"Confidence: {confidence:.1%} ({t})")
 
     def on_camera_label_resize(self, event: tk.Event) -> None:
         """Placeholder for handling camera label resize events."""
