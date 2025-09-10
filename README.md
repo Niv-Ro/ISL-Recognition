@@ -17,18 +17,18 @@ Engineered a CNN-based recognition system achieving **91% accuracy** across 22 H
 
 
 ### 🎨 Key Features
-Real-time hand tracking and sign prediction with a single hand.
-Gesture controls for all text operations:
-  Two Hands: Add the predicted letter.
-  Head Nod: Add a space or convert to a final letter.
-  Head Shake: Delete the last character (backspace).
-  Hand Close to Camera: Clear all text.
-Display of predicted letter and confidence score.
-Text construction area that is manipulated entirely by gestures.
-FPS counter for performance monitoring.
-Graceful handling of model loading and camera operations.
-Detailed preprocessing steps to match dataset creation conditions for optimal accuracy.
-Stability delay to prevent incorrect predictions of transitional movements.
+- Real-time hand tracking and sign prediction with a single hand.
+- Gesture controls for all text operations:
+  - Two Hands: Add the predicted letter.
+  - Head Nod: Add a space or convert to a final letter.
+  - Head Shake: Delete the last character (backspace).
+  - Hand Close to Camera: Clear all text.
+- Display of predicted letter and confidence score.
+- Text construction area that is manipulated entirely by gestures.
+- FPS counter for performance monitoring.
+- Graceful handling of model loading and camera operations.
+- Detailed preprocessing steps to match dataset creation conditions for optimal accuracy.
+- Stability delay to prevent incorrect predictions of transitional movements.
 
 ### video link to project preview
 https://youtu.be/zYxUgy_xoqM
