@@ -27,7 +27,7 @@ cd ISL-Recognition
 # Install required packages
 pip install tensorflow opencv-python mediapipe numpy pandas scikit-learn matplotlib
 
-# Instructions:
+# Instructions
 
 Step 0: Open Phycharm with the files
 
