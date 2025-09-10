@@ -27,17 +27,15 @@ cd ISL-Recognition
 # Install required packages
 pip install tensorflow opencv-python mediapipe numpy pandas scikit-learn matplotlib
 
+#Instructions:
+
 Step 0: Open Phycharm with the files
 
 Step 1: Data Collection
 Collect gesture samples for each Hebrew character:
 
-Run data collection script
-python data_collection.py
-
-Instructions:
 1. Change the letter destination in the data collection file: folder = "Data/<Character>"
-2. run the data collection
+2. run the data collection python data_collection.py
 3. Position your hand in front of the camera
 4. The system will automatically detect your hand using MediaPipe
 5. Press the "s" key for each Hebrew letter to start capturing one by one (untill you will have 500)
