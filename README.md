@@ -31,10 +31,10 @@ Step 0: Open Phycharm with the files
 Step 1: Data Collection
 Collect gesture samples for each Hebrew character:
 
-# Run data collection script
+Run data collection script
 python data_collection.py
 
-# Instructions:
+Instructions:
 1. Change the letter destination in the data collection file: folder = "Data/<Character>"
 2. run the data collection
 3. Position your hand in front of the camera
@@ -44,13 +44,13 @@ python data_collection.py
 7. Move to next character (follow step 1)
 8. Images are saved in ./data/ directory organized by character
 
-# Step 2: Model Training
+### Step 2: Model Training
 Train the CNN model on collected data:
 
-# Run training script
+Run training script
 python train_final.py
 
-# This will:
+### This will:
 - Load 11,000+ samples from ./data/ directory
 - Apply data augmentation (rotation, scaling, noise injection)
 - Normalize and preprocess images
@@ -59,13 +59,13 @@ python train_final.py
 - Implement batch processing for efficient training
 - Save trained model to ./model/- Display training metrics and accuracy (91%)
 
-# Step 3: Real-time Recognition
+### Step 3: Real-time Recognition
 Launch the GUI for real-time gesture recognition:
 
-# Run the recognition interface
+Run the recognition interface
 python gui_ver_2.py
 
-# Features:
+Features:
 Real-time hand tracking and sign prediction with a single hand.
 Gesture controls for all text operations:
   Two Hands: Add the predicted letter.
