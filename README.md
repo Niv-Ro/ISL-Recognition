@@ -28,7 +28,9 @@ cd ISL-Recognition
 
 
 # Install required packages
+```bash
 pip install tensorflow opencv-python mediapipe numpy pandas scikit-learn matplotlib
+```
 
 # Instructions
 
