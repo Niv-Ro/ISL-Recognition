@@ -16,60 +16,7 @@ Engineered a CNN-based recognition system achieving **91% accuracy** across 22 H
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white) ![MediaPipe](https://img.shields.io/badge/MediaPipe-00897B?style=for-the-badge&logo=google&logoColor=white) ![OpenCV](https://img.shields.io/badge/opencv-%23white.svg?style=for-the-badge&logo=opencv&logoColor=white)
 
 
-### 🚀 Quick Start
-
-#### Prerequisites
-
-# Clone the repository
-```bash
-git clone https://github.com/Niv-Ro/ISL-Recognition.git
-cd ISL-Recognition
-```
-
-
-# Install required packages
-```bash
-pip install tensorflow opencv-python mediapipe numpy pandas scikit-learn matplotlib
-```
-
-# Instructions
-
-Step 0: Open Phycharm with the files
-
-Step 1: Data Collection
-Collect gesture samples for each Hebrew character:
-
-1. Change the letter destination in the data collection file: folder = "Data/<Character>"
-2. run the data collection python data_collection.py
-3. Position your hand in front of the camera
-4. The system will automatically detect your hand using MediaPipe
-5. Press the "s" key for each Hebrew letter to start capturing one by one (untill you will have 500)
-6. stop running
-7. Move to next character (follow step 1)
-8. Images are saved in ./data/ directory organized by character
-
-### Step 2: Model Training
-Train the CNN model on collected data:
-
-Run training script
-python train_final.py
-
-### This will:
-- Load 11,000+ samples from ./data/ directory
-- Apply data augmentation (rotation, scaling, noise injection)
-- Normalize and preprocess images
-- Split data 80/20 for training/validation
-- Train CNN with optimized hyperparameters
-- Implement batch processing for efficient training
-- Save trained model to ./model/- Display training metrics and accuracy (91%)
-
-### Step 3: Real-time Recognition
-Launch the GUI for real-time gesture recognition:
-
-Run the recognition interface
-python gui_ver_2.py
-
-Features:
+### 🎨 Key Features
 Real-time hand tracking and sign prediction with a single hand.
 Gesture controls for all text operations:
   Two Hands: Add the predicted letter.
