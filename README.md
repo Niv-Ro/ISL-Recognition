@@ -21,8 +21,10 @@ Engineered a CNN-based recognition system achieving **91% accuracy** across 22 H
 #### Prerequisites
 
 # Clone the repository
+'''bash
 git clone https://github.com/Niv-Ro/ISL-Recognition.git
 cd ISL-Recognition
+'''
 
 # Install required packages
 pip install tensorflow opencv-python mediapipe numpy pandas scikit-learn matplotlib
