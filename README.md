@@ -22,6 +22,5 @@ Engineered a CNN-based recognition system achieving **91% accuracy** across 22 H
 - Detailed preprocessing steps to match dataset creation conditions for optimal accuracy.
 - Stability delay to prevent incorrect predictions of transitional movements.
 
-### video link to project preview
-https://youtu.be/zYxUgy_xoqM
+https://github.com/user-attachments/assets/ae76bab1-4e91-424d-bb60-ba7ca5162283
 
