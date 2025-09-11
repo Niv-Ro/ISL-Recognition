@@ -613,23 +613,40 @@ class HebrewSignLanguageApp:
         # Get the horizontal center of the detected face.
         center_x = faces[0][0] + faces[0][2] // 2
         self.head_x_history.append(center_x)
-        if len(self.head_x_history) < 10: return False # Need enough data points.
+        if len(self.head_x_history) < 10: 
+            # Reset potential state when rebuilding history after a successful detection
+            if len(self.head_x_history) == 1:
+                self.is_shaking_potential = False
+                self.shake_start_time = 0
+            return False # Need enough data points.
 
         # Check if the horizontal movement range exceeds a threshold.
-        if (max(self.head_x_history) - min(self.head_x_history)) > 40: # 40 pixel threshold
+        x_range = max(self.head_x_history) - min(self.head_x_history)
+        
+        # Check for successful detection FIRST, regardless of current threshold
+        if self.is_shaking_potential:
+            time_elapsed = current_time - self.shake_start_time
+            if time_elapsed > 0.5:  # 0.5 seconds for shake (same as nod)
+                # Aggressive cleanup after successful detection
+                self.is_shaking_potential = False
+                self.shake_start_time = 0
+                self.head_x_history.clear()
+                return True
+        
+        if x_range > 25: # 25 pixel threshold (more sensitive than nod detection)
             # If this is the start of a potential shake, record the time.
             if not self.is_shaking_potential:
                 self.is_shaking_potential = True
                 self.shake_start_time = current_time
-
-            # If the movement has been sustained for the required duration, it's a valid gesture.
-            if self.is_shaking_potential and (current_time - self.shake_start_time > HEAD_GESTURE_DURATION):
-                self.is_shaking_potential = False # Reset for the next gesture.
-                self.head_x_history.clear()
-                return True
         else:
-            # If movement is below the threshold, it's not a shake.
-            self.is_shaking_potential = False
+            # If movement is below the threshold, give it a brief grace period for oscillation
+            if self.is_shaking_potential:
+                # Only cancel if we've been below threshold for more than 0.3 seconds
+                time_since_start = current_time - self.shake_start_time
+                if time_since_start >= 0.8:  # Allow up to 0.8s total (0.5s + 0.3s grace)
+                    self.is_shaking_potential = False
+            else:
+                self.is_shaking_potential = False
 
         return False
 
@@ -654,7 +671,7 @@ class HebrewSignLanguageApp:
                 self.nod_start_time = current_time
 
             # If the movement has been sustained for the required duration, it's a valid gesture.
-            if self.is_nodding_potential and (current_time - self.nod_start_time > HEAD_GESTURE_DURATION):
+            if self.is_nodding_potential and (current_time - self.nod_start_time > 0.5):  # 0.5 seconds for nod
                 self.is_nodding_potential = False # Reset for the next gesture.
                 self.head_y_history.clear()
                 return True
@@ -696,10 +713,14 @@ class HebrewSignLanguageApp:
     def trigger_backspace_action(self):
         """Deletes the last character from the text display."""
         print("ACTION: Head Shake -> Backspace")
-        if self.current_text and self.text_display.get("1.0", tk.END).strip() != "Your text will appear here...":
+        # Simplified logic - just check if there's text to delete
+        if self.current_text:
+            print(f"DELETING: '{self.current_text[-1]}' from '{self.current_text}'")
             # Simple string slicing to remove the last character.
             self.current_text = self.current_text[:-1]
             self.update_text_display()
+        else:
+            print("BACKSPACE: No text to delete")
 
     def trigger_clear_text_action(self):
         """Clears all text from the display."""
@@ -708,6 +729,13 @@ class HebrewSignLanguageApp:
         self.prediction_history.clear()
         self.update_prediction_display("-", 0.0)
         self.update_text_display()
+        # Clear head gesture states to prevent interference
+        self.is_shaking_potential = False
+        self.is_nodding_potential = False
+        self.shake_start_time = 0
+        self.nod_start_time = 0
+        self.head_x_history.clear()
+        self.head_y_history.clear()
 
     def draw_all_feedback(self, image: np.ndarray):
         """Draws visual feedback for gestures on the display image (TEXT ONLY)."""
